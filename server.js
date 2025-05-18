@@ -36,13 +36,23 @@ console.log("EMAIL_TO:", process.env.EMAIL_TO);
 app.post("/send-email", async (req, res) => {
   const { firstName, lastName, company, email,countryCode, phone, service, others, message } = req.body;
 
+  // const transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: process.env.EMAIL,
+  //     pass: process.env.EMAIL_PASS,
+  //   },
+  // });
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  host: "smtp.hostinger.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 
   const mailOptions = {
     from: email,
@@ -75,12 +85,15 @@ app.post("/send-email-solutions", async (req, res) => {
   const { fullName, phone, email, jobTitle, company, country, service, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  host: "smtp.hostinger.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 
   const mailOptions = {
     from: email,
@@ -126,12 +139,15 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+  host: "smtp.hostinger.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 
     const mailOptions = {
       from: `"Career Form" <${process.env.EMAIL}>`,
