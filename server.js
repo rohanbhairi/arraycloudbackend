@@ -24,12 +24,6 @@ process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection:", reason);
 });
 
-// Debug environment variables (remove or comment in production)
-console.log("EMAIL:", process.env.EMAIL);
-console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
-console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL);
-console.log("EMAIL_TO:", process.env.EMAIL_TO);
-
 app.get("/healthz", (req, res) => {
   res.status(200).send("OK");
 });
