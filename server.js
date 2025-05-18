@@ -53,19 +53,20 @@ app.post("/send-email", async (req, res) => {
 
 
   const mailOptions = {
-    from: email,
-    to: process.env.RECEIVER_EMAIL,
-    subject: `New Consultation Request from ${company}`,
-    text: `
+  from: `"${firstName} ${lastName}" <${process.env.EMAIL}>`, // Fixed sender
+  to: process.env.RECEIVER_EMAIL,
+  subject: `New Consultation Request from ${company}`,
+  text: `
 Name: ${firstName} ${lastName}
 Company: ${company}
 Email: ${email}
-Contact No.:${countryCode} ${phone}
+Contact No.: ${countryCode} ${phone}
 Service: ${service}
 Additional Info: ${others}
 Message: ${message}
-    `,
-  };
+  `,
+};
+
 
   try {
     await transporter.sendMail(mailOptions);
@@ -94,7 +95,7 @@ app.post("/send-email-solutions", async (req, res) => {
 
 
   const mailOptions = {
-    from: email,
+  from: `"${fullName}" <${process.env.EMAIL}>`, // Fixed sender
     to: process.env.RECEIVER_EMAIL,
     subject: `New Contact Submission from ${fullName}`,
     text: `
@@ -188,5 +189,5 @@ Message: ${message}
 // ============================
 // Start the server
 // ============================
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
